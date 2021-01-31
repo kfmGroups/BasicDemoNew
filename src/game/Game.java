@@ -17,7 +17,7 @@ public class Game {
     private World world;
 
     /** A graphical display of the world (a specialised JPanel). */
-    private UserView view;
+    private MyView view;
 
     /** Initialise a new Game. */
     public Game() {
@@ -39,22 +39,31 @@ public class Game {
         // add another platform here
 
         // make a character
-        Shape studentShape = new PolygonShape(
+        /*Shape studentShape = new PolygonShape(
                 -0.11f,1.8f,
-                         0.87f,1.48f,
-                         0.99f,0.29f,
-                         0.24f,-2.32f,
-                         -1.12f,-2.27f,
-                         -1.24f,1.21f);
-        DynamicBody student = new DynamicBody(world, studentShape);
-        student.addImage(new BodyImage("data/student.png", 5f));
+                0.87f,1.48f,
+                0.99f,0.29f,
+                0.24f,-2.32f,
+                -1.12f,-2.27f,
+                -1.24f,1.21f);
+       // DynamicBody student = new DynamicBody(world, studentShape);*.
+
+         */
+         Shape professorShape = new PolygonShape(
+                 0.7f,4.94f, -3.98f,3.64f, -0.88f,-4.68f, 2.96f,-4.88f, 3.68f,3.56f, 0.86f,4.98f);
+
+        MovableCharacter student = new MovableCharacter(world, professorShape);
+
+         student.addImage(new BodyImage("data/professor.png", 10f));
         student.setPosition(new Vec2(8, -10));
+        student.setAlwaysOutline(true);
+        student.jump(8.0f);
        // student.setAlwaysOutline(true);
 
         // add more bodies here
 
         // make a view
-        view = new UserView(world, 500, 500);
+        view = new MyView(world, 500, 500);
 
         // uncomment this to draw a 1-metre grid over the view
         // view.setGridResolution(1);
