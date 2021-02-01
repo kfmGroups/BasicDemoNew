@@ -28,6 +28,7 @@ public class MouseHandler extends MouseAdapter {
      * @param e event object containing the mouse position
      */
     public void mousePressed(MouseEvent e) {
+
         DynamicBody ball = new DynamicBody(view.getWorld(), ballShape);
         ball.setPosition(view.viewToWorld(e.getPoint()));
         ball.addImage(ballImage);

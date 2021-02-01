@@ -20,6 +20,9 @@ public class Game {
     private MyView view;
 
     /** Initialise a new Game. */
+
+    private MovableCharacter character;
+
     public Game() {
 
         // make the world
@@ -52,12 +55,10 @@ public class Game {
          Shape professorShape = new PolygonShape(
                  0.7f,4.94f, -3.98f,3.64f, -0.88f,-4.68f, 2.96f,-4.88f, 3.68f,3.56f, 0.86f,4.98f);
 
-        MovableCharacter student = new MovableCharacter(world, professorShape);
+        //add key 'a' to positive sign move forward
+        //add key 'd' to negative move backwards
+        //add key 'w' and 'space' to
 
-         student.addImage(new BodyImage("data/professor.png", 10f));
-        student.setPosition(new Vec2(8, -10));
-        student.setAlwaysOutline(true);
-        student.jump(8.0f);
        // student.setAlwaysOutline(true);
 
         // add more bodies here
@@ -68,10 +69,17 @@ public class Game {
         // uncomment this to draw a 1-metre grid over the view
         // view.setGridResolution(1);
 
+        view.setCharacter(new MovableCharacter(world, professorShape));
+        MovableCharacter character = view.getCharacter();
+
+        character.addImage(new BodyImage("data/professor.png", 10f));
+        character.setPosition(new Vec2(8, -10));
+        character.setAlwaysOutline(false);
+
         // add some mouse actions
         // add this to the view, so coordinates are relative to the view
-        view.addMouseListener(new MouseHandler(view));
-
+        //view.addMouseListener(new MouseHandler(view));
+        view.addKeyListener(new KeyHandler(view));
         // add the view to a frame (Java top level window)
         final JFrame frame = new JFrame("Basic world");
         frame.add(view);
