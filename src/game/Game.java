@@ -21,7 +21,7 @@ public class Game {
 
     /** Initialise a new Game. */
 
-    private MovableCharacter character;
+  //  private MovableCharacter character;
 
     public Game() {
 
@@ -78,11 +78,12 @@ public class Game {
 
         // add some mouse actions
         // add this to the view, so coordinates are relative to the view
-        //view.addMouseListener(new MouseHandler(view));
-        view.addKeyListener(new KeyHandler(view));
+        view.addMouseListener(new MouseHandler(view));
+        //view
         // add the view to a frame (Java top level window)
         final JFrame frame = new JFrame("Basic world");
         frame.add(view);
+        frame.addKeyListener(new KeyHandler(view));
 
         // enable the frame to quit the application
         // when the x button is pressed
