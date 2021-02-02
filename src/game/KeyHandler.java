@@ -41,12 +41,27 @@ public class KeyHandler extends KeyAdapter {
                 break;
         }
 
-        super.keyPressed(e);
+//        super.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         System.out.println(e.getKeyChar());
-        super.keyReleased(e);
+//        super.keyReleased(e);
+        switch (e.getKeyChar()) {
+
+            case 'a':
+                System.out.println("hello for a");
+                view.getCharacter().stopWalking();
+                break;
+
+            case 'd':
+                view.getCharacter().stopWalking();
+                break;
+
+            default:
+                System.out.println("wrong Key");
+                break;
+        }
     }
 }
