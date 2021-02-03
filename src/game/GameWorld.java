@@ -9,12 +9,14 @@ import org.jbox2d.common.Vec2;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 
 public class GameWorld extends World {
     //todo make into an array for faster cmputation
     private Image background;
     private CowboyCharacter cowboy;
     private ZombieCharacter zombie;
+    private ArrayList<Vec2> platformPosition;
 
     public GameWorld(){
         super();
@@ -35,24 +37,36 @@ public class GameWorld extends World {
         // make a character
         cowboy = new CowboyCharacter(this);
         cowboy.setPosition(new Vec2(4,-10));
-        cowboy.setAlwaysOutline(true);
-        zombie = new ZombieCharacter(this);
-        zombie.setPosition(new Vec2(-9, 6));
-        zombie.setAlwaysOutline(true);
-        zombie.addCollisionListener(new CollisionEngine(cowboy));
 
-        for (int i = 0; i < 10; i++){
-            //redBalls increase the health count of a character
-            Body redBall = new RedBallCharacter(this);
-            redBall.setPosition(new Vec2(i*2-10,10));
-            redBall.setAlwaysOutline(true);
-            //now each ball has a collision listener thus whenever the ball collides with another object collision occurs
-            redBall.addCollisionListener(new CollisionEngine(cowboy));
-        }
+        platformPosition = new ArrayList<>();
+        platformPosition.add(platform1.getPosition());
+        platformPosition.add(platform2.getPosition());
+        createEnemies();
+        createHealthBall();
+
 
 
     }
 
+    public void createHealthBall(){
+        for (int i = 0; i < 10; i++){
+            //redBalls increase the health count of a character
+            Body redBall = new RedBallCharacter(this);
+            redBall.setPosition(new Vec2(i*2-10,10));
+            //redBall.setAlwaysOutline(true);
+            //now each ball has a collision listener thus whenever the ball collides with another object collision occurs
+            redBall.addCollisionListener(new CollisionEngine(cowboy));
+        }
+    }
+
+    public void createEnemies(){
+        for (int j = 0; j < 2; j++) {
+            zombie = new ZombieCharacter(this);
+            zombie.setPosition(new Vec2(platformPosition.get(j).x + 2.0f, platformPosition.get(j).y + 0.5f));
+           //zombie.setAlwaysOutline(true);
+            zombie.addCollisionListener(new CollisionEngine(cowboy));
+        }
+    }
     //@Override
     protected void paintBackground(Graphics2D g){
         g.drawImage(background,0,0, (ImageObserver) this);
