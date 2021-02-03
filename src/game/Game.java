@@ -31,7 +31,7 @@ public class Game {
         world = new GameWorld();
 
         // make a view
-        view = new UserView(world, 500, 500);
+        view = new myView(world, 500, 500);
 
         // uncomment this to draw a 1-metre grid over the view
         // view.setGridResolution(1);
@@ -42,10 +42,9 @@ public class Game {
 
         // add some mouse actions
         // add this to the view, so coordinates are relative to the view
-        view.addMouseListener(new MouseHandler(view));
-
+       // view.addMouseListener(new MouseHandler(view));
         //view
-        // add the view to a frame (Java top level window)
+        // add the view to a frame (Java top level window)a
         final JFrame frame = new JFrame("Basic world");
         frame.add(view);
         frame.addKeyListener(new CharacterController(world.getPlayer()));

@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 public class CharacterController extends KeyAdapter {
 
     //logic for controlling the cowboy is in Character controller
-    private static final float JUMPING_VALUE = 12;
+    private static final float JUMPING_VALUE = 14;
     private static final float WALKING_SPEED_VALUE = 4;
 
     //we want this body to refer to the cowboy

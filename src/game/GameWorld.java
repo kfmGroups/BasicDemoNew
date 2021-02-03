@@ -3,10 +3,16 @@ package game;
 /*A game world is a world with some bodies*/
 
 import city.cs.engine.*;
+import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.ImageObserver;
 
 public class GameWorld extends World {
     //todo make into an array for faster cmputation
+    private Image background;
     private CowboyCharacter cowboy;
     private ZombieCharacter zombie;
 
@@ -45,6 +51,11 @@ public class GameWorld extends World {
         }
 
 
+    }
+
+    //@Override
+    protected void paintBackground(Graphics2D g){
+        g.drawImage(background,0,0, (ImageObserver) this);
     }
 
     public CowboyCharacter getPlayer(){
