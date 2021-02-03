@@ -22,6 +22,7 @@ public class myView extends city.cs.engine.UserView {
         try {
             spriteSheet = ImageIO.read(new File("data/charSprites.png")); //loading sprite sheet
             animation = new Animation(spriteSheet); //providing the animation class with the sprite sheeet
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 public class CharacterController extends KeyAdapter {
 
     //logic for controlling the cowboy is in Character controller
-    private static final float JUMPING_VALUE = 15;
-    private static final float WALKING_SPEED_VALUE = 5;
+    private static final float JUMPING_VALUE = 12;
+    private static final float WALKING_SPEED_VALUE = 4;
 
     //we want this body to refer to the cowboy
     private Walker body;
@@ -28,9 +28,10 @@ public class CharacterController extends KeyAdapter {
     /*handle key pressesd of the form awd*/
     @Override
     public void keyPressed(KeyEvent e) {
-        //System.out.println(e.getKeyCode());
-      //  System.out.println("getkey|Char()" + e.getKeyChar());
-        switch (e.getKeyChar()) {
+
+
+//     Converting the key code all to lowercase to make sure 'W' and 'w' both work as an input
+        switch (Character.toLowerCase(e.getKeyChar())) {
             case 'w':
                 body.jump(JUMPING_VALUE);
                 break;
@@ -53,7 +54,7 @@ public class CharacterController extends KeyAdapter {
     @Override
     public void keyReleased(KeyEvent e) {
 //        super.keyReleased(e);
-        switch (e.getKeyChar()) {
+        switch (Character.toLowerCase(e.getKeyChar())) {
 
             case 'a':
             case 'd':
