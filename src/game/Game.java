@@ -5,7 +5,6 @@ import city.cs.engine.Shape;
 import org.jbox2d.common.Vec2;
 
 import javax.swing.JFrame;
-import java.awt.*;
 
 
 /**
@@ -14,10 +13,13 @@ import java.awt.*;
 public class Game {
 
     /** The World in which the bodies move and interact. */
-    private World world;
+    private GameWorld world;
 
     /** A graphical display of the world (a specialised JPanel). */
-    private MyView view;
+    private UserView view;
+
+    private Animation animation;
+
 
     /** Initialise a new Game. */
 
@@ -26,64 +28,27 @@ public class Game {
     public Game() {
 
         // make the world
-        world = new World();
-
-        // make the ground
-        Shape shape = new BoxShape(11, 0.5f);
-        StaticBody ground = new StaticBody(world, shape);
-        ground.setPosition(new Vec2(0, -11.5f));
-
-
-        // make a platform
-        Shape platform1Shape = new BoxShape(4, 0.5f);
-        StaticBody platform1 = new StaticBody(world, platform1Shape);
-        platform1.setPosition(new Vec2(-9, 5.5f));
-
-        // add another platform here
-
-        // make a character
-        /*Shape studentShape = new PolygonShape(
-                -0.11f,1.8f,
-                0.87f,1.48f,
-                0.99f,0.29f,
-                0.24f,-2.32f,
-                -1.12f,-2.27f,
-                -1.24f,1.21f);
-       // DynamicBody student = new DynamicBody(world, studentShape);*.
-
-         */
-         Shape professorShape = new PolygonShape(
-                 0.7f,4.94f, -3.98f,3.64f, -0.88f,-4.68f, 2.96f,-4.88f, 3.68f,3.56f, 0.86f,4.98f);
-
-        //add key 'a' to positive sign move forward
-        //add key 'd' to negative move backwards
-        //add key 'w' and 'space' to
-
-       // student.setAlwaysOutline(true);
-
-        // add more bodies here
+        world = new GameWorld();
 
         // make a view
-        view = new MyView(world, 500, 500);
+        view = new UserView(world, 500, 500);
 
         // uncomment this to draw a 1-metre grid over the view
         // view.setGridResolution(1);
 
-        view.setCharacter(new MovableCharacter(world, professorShape));
-        MovableCharacter character = view.getCharacter();
+        //view.setCharacter(world.getPlayer());
 
-        character.addImage(new BodyImage("data/professor.png", 10f));
-        character.setPosition(new Vec2(8, -10));
-        character.setAlwaysOutline(false);
+
 
         // add some mouse actions
         // add this to the view, so coordinates are relative to the view
         view.addMouseListener(new MouseHandler(view));
+
         //view
         // add the view to a frame (Java top level window)
         final JFrame frame = new JFrame("Basic world");
         frame.add(view);
-        frame.addKeyListener(new KeyHandler(view));
+        frame.addKeyListener(new CharacterController(world.getPlayer()));
 
         // enable the frame to quit the application
         // when the x button is pressed
