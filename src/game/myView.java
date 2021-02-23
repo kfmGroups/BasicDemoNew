@@ -13,13 +13,13 @@ import java.io.IOException;
 public class myView extends city.cs.engine.UserView {
     private Image background;
 
+
     private Animation animation;
     //BufferedImage spriteSheet;
 
     public myView(World w, int width, int height) {
         super(w, width, height);
-        background = new ImageIcon("data/BG.png").getImage();
-
+        background = new ImageIcon("data/BGI.gif").getImage();
 
     }
 

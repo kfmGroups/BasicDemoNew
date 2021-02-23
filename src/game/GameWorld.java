@@ -12,31 +12,97 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 public class GameWorld extends World {
-    //todo make into an array for faster cmputation
+    //todo make into an array for faster computation
     private Image background;
     private CowboyCharacter cowboy;
     private ZombieCharacter zombie;
     private ArrayList<Vec2> platformPosition;
+<<<<<<< HEAD
+
+    private static final BodyImage platformTexture = new BodyImage("data/platform.jpeg");
+    private static final BodyImage groundTexture = new BodyImage("data/ground.jpeg", 2);
+=======
+>>>>>>> a96b5b40723c4a8d51041bc59e4931eeb390d199
 
     public GameWorld(){
         super();
 
-        //make the ground
+
         // make the ground
-        Shape shape = new BoxShape(11, 0.5f);
+        Shape shape = new BoxShape(14, 1);
         StaticBody ground = new StaticBody(this, shape); //referring to an object of this class
-        ground.setPosition(new Vec2(0, -11.5f));
+        ground.setPosition(new Vec2(0, -15.5f));
+        ground.addImage(groundTexture);
+       // ground.setFillColor(Color.lightGray);
+
 
         // make a platform
         Shape platform1Shape = new BoxShape(4, 0.5f);
         StaticBody platform1 = new StaticBody(this, platform1Shape);
         platform1.setPosition(new Vec2(-9, 5.5f));
-        Body platform2 = new StaticBody(this, platform1Shape);
-        platform2.setPosition(new Vec2(5,-2.5f));
+        platform1.addImage(platformTexture);
+        //platform1.setFillColor(Color.lightGray);
+
+
+        // add another platform here
+        StaticBody platform2 = new StaticBody(this, platform1Shape);
+        platform2.setPosition(new Vec2(5,-1.5f));
+        platform2.addImage(platformTexture);
+        //platform2.setFillColor(Color.lightGray);
+
+        // add another platform here
+        StaticBody platform3 = new StaticBody(this, platform1Shape);
+        platform3.setPosition(new Vec2(9,7.5f));
+        platform3.addImage(platformTexture);
+        //platform3.setFillColor(Color.lightGray);
+
+        // add another platform here
+        StaticBody platform4 = new StaticBody(this, platform1Shape);
+        platform4.setPosition(new Vec2(-7,-6f));
+        platform4.addImage(platformTexture);
+        //platform4.setFillColor(Color.lightGray);
+
+        // add another platform here
+        StaticBody platform5 = new StaticBody(this, platform1Shape);
+        platform5.setPosition(new Vec2(12,14.5f));
+        platform5.addImage(platformTexture);
+
+        // add another platform here
+        StaticBody platform6 = new StaticBody(this, platform1Shape);
+        platform6.setPosition(new Vec2(-5,20.5f));
+        platform6.addImage(platformTexture);
+
+        // make a right wall
+        Shape wall1Shape = new BoxShape(0.5f, 20f);
+        StaticBody wall1 = new StaticBody(this, wall1Shape);
+        wall1.setPosition(new Vec2(13, 0f));
+
+        // make a left wall
+        Shape wall2Shape = new BoxShape(0.5f, 20f);
+        StaticBody wall2 = new StaticBody(this, wall2Shape);
+        wall2.setPosition(new Vec2(-13, 0f));
+
 
         // make a character
         cowboy = new CowboyCharacter(this);
         cowboy.setPosition(new Vec2(4,-10));
+<<<<<<< HEAD
+        //cowboy.setAlwaysOutline(true);
+
+        platformPosition = new ArrayList<>();
+        platformPosition.add(platform1.getPosition());
+        platformPosition.add(platform2.getPosition());
+        createEnemies();
+        createHealthBall();
+
+    }
+
+    public void createHealthBall(){
+        for (int i = 0; i < 15; i++){
+            //redBalls increase the health count of a character
+            Body redBall = new RedBallCharacter(this);
+            redBall.setPosition(new Vec2(i*2-10,25));
+=======
 
         platformPosition = new ArrayList<>();
         platformPosition.add(platform1.getPosition());
@@ -53,6 +119,7 @@ public class GameWorld extends World {
             //redBalls increase the health count of a character
             Body redBall = new RedBallCharacter(this);
             redBall.setPosition(new Vec2(i*2-10,10));
+>>>>>>> a96b5b40723c4a8d51041bc59e4931eeb390d199
             //redBall.setAlwaysOutline(true);
             //now each ball has a collision listener thus whenever the ball collides with another object collision occurs
             redBall.addCollisionListener(new CollisionEngine(cowboy));

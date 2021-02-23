@@ -16,7 +16,7 @@ public class Game {
     private GameWorld world;
 
     /** A graphical display of the world (a specialised JPanel). */
-    private UserView view;
+    private myView view;
 
     private Animation animation;
 
@@ -31,26 +31,28 @@ public class Game {
         world = new GameWorld();
 
         // make a view
-        view = new myView(world, 500, 500);
+        view = new myView(world, 500, 600);
+        //view.setZoom(20);
 
         // uncomment this to draw a 1-metre grid over the view
-        // view.setGridResolution(1);
-
-        //view.setCharacter(world.getPlayer());
+         //view.setGridResolution(1);
 
 
 
         // add some mouse actions
         // add this to the view, so coordinates are relative to the view
-       // view.addMouseListener(new MouseHandler(view));
+        view.addMouseListener(new MouseHandler(view,world.getPlayer()));
+
+        // used as a way of tracking the character.
+        world.addStepListener(new Tracker(view, world.getPlayer()));
+
         //view
         // add the view to a frame (Java top level window)a
-        final JFrame frame = new JFrame("Basic world");
+        final JFrame frame = new JFrame("Doodle Jump");
         frame.add(view);
         frame.addKeyListener(new CharacterController(world.getPlayer()));
 
         // enable the frame to quit the application
-        // when the x button is pressed
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
         // don't let the frame be resized
@@ -61,7 +63,7 @@ public class Game {
         frame.setVisible(true);
 
         // uncomment this to make a debugging view
-        // JFrame debugView = new DebugViewer(world, 500, 500);
+        //JFrame debugView = new DebugViewer(world, 500, 600);
 
         // start our game world simulation!
         world.start();
