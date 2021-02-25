@@ -37,6 +37,9 @@ public class Game {
         // uncomment this to draw a 1-metre grid over the view
          //view.setGridResolution(1);
 
+        Sound bgmusic = new Sound("data/eskay.wav");
+        bgmusic.play();
+        bgmusic.stop();
 
 
         // add some mouse actions

@@ -14,6 +14,7 @@ public class CowboyCharacter extends Walker {
 
 
 
+
     public CowboyCharacter(World world) {
         super(world, shape);//calling the constructor of walker to add the Cowboy character object to the world parameter
         addImage(image);

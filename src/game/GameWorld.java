@@ -17,12 +17,9 @@ public class GameWorld extends World {
     private CowboyCharacter cowboy;
     private ZombieCharacter zombie;
     private ArrayList<Vec2> platformPosition;
-<<<<<<< HEAD
 
     private static final BodyImage platformTexture = new BodyImage("data/platform.jpeg");
     private static final BodyImage groundTexture = new BodyImage("data/ground.jpeg", 2);
-=======
->>>>>>> a96b5b40723c4a8d51041bc59e4931eeb390d199
 
     public GameWorld(){
         super();
@@ -86,7 +83,6 @@ public class GameWorld extends World {
         // make a character
         cowboy = new CowboyCharacter(this);
         cowboy.setPosition(new Vec2(4,-10));
-<<<<<<< HEAD
         //cowboy.setAlwaysOutline(true);
 
         platformPosition = new ArrayList<>();
@@ -102,24 +98,6 @@ public class GameWorld extends World {
             //redBalls increase the health count of a character
             Body redBall = new RedBallCharacter(this);
             redBall.setPosition(new Vec2(i*2-10,25));
-=======
-
-        platformPosition = new ArrayList<>();
-        platformPosition.add(platform1.getPosition());
-        platformPosition.add(platform2.getPosition());
-        createEnemies();
-        createHealthBall();
-
-
-
-    }
-
-    public void createHealthBall(){
-        for (int i = 0; i < 10; i++){
-            //redBalls increase the health count of a character
-            Body redBall = new RedBallCharacter(this);
-            redBall.setPosition(new Vec2(i*2-10,10));
->>>>>>> a96b5b40723c4a8d51041bc59e4931eeb390d199
             //redBall.setAlwaysOutline(true);
             //now each ball has a collision listener thus whenever the ball collides with another object collision occurs
             redBall.addCollisionListener(new CollisionEngine(cowboy));

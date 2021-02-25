@@ -6,7 +6,7 @@ import city.cs.engine.World;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import java.util.HashMap;
 
 public class CharacterController extends KeyAdapter {
 
@@ -24,14 +24,20 @@ public class CharacterController extends KeyAdapter {
     //Flags for setting the cowboy jump to the left or right
     private boolean isFacingLeft = false;
 
-
-
     //we want this body to refer to the cowboy
     private Walker body;
 
+    private enum Movement {
+        RUN, JUMP
+    }
+
+    private HashMap<Movement, Sound> sfx;
 
     public CharacterController(Walker body) {
         this.body = body;
+        sfx = new HashMap<>();
+        sfx.put(Movement.RUN, new Sound("data/run.wav"));
+        sfx.put(Movement.JUMP, new Sound("data/jump.wav"));
     }
 
     @Override
@@ -48,16 +54,22 @@ public class CharacterController extends KeyAdapter {
 
         //makes the character go left
         if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
+            sfx.get(Movement.RUN).play();
             body.startWalking(-WALKING_SPEED_VALUE);
             body.removeAllImages();
             body.addImage(cowboyLeft);
             isFacingLeft = true;
 
+
+
             //makes the character go right
         } else if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
+            sfx.get(Movement.RUN).play();
             body.startWalking(WALKING_SPEED_VALUE);
             body.removeAllImages();
             body.addImage(cowboyRight);
+
+
 
             // press Q to quit the application
         } else if (code == KeyEvent.VK_Q ) {
@@ -66,6 +78,7 @@ public class CharacterController extends KeyAdapter {
 
             //makes the character jump
         } else if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_UP) {
+            sfx.get(Movement.JUMP).play();
             body.jump(JUMPING_VALUE);
             body.removeAllImages();
             if (isFacingLeft) {
@@ -82,11 +95,13 @@ public class CharacterController extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
+            sfx.get(Movement.RUN).stop();
             body.stopWalking();
             body.removeAllImages();
             body.addImage(imageL);
 
         } else if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
+            sfx.get(Movement.RUN).stop();
             body.stopWalking();
             body.removeAllImages();
             body.addImage(imageR);
